@@ -39,3 +39,17 @@ The `vehicle` in the example above refers to the successfully decoded data store
 
 Note that the `Parser.decode` method has an optional second parameter of the type of decode you wish to have returned: 1 = Basic, 2 = Advanced.
 
+## Decode Class
+
+The `Decoder::Decode` class is the base data class for the module.  All other data classes are referenced from this class.
+
+You can instantiate this class directly if you have JSON from VIN Vault (for example persisted from a database) by calling:
+
+```ruby
+vehicle = Decoder::Decode.new(json_string)
+```
+
+This will return a new `Decode` object.
+
+Please refer to the VIN Vault documentation for more information on the data format.
+
