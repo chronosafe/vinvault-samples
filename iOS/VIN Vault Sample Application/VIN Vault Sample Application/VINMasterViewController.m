@@ -16,7 +16,11 @@
 
 @interface VINMasterViewController ()
 {
+<<<<<<< HEAD
     NSMutableData *mutData;  // JSON data
+=======
+    NSMutableData *mutData;
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -87,7 +91,10 @@
         NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         
+<<<<<<< HEAD
         // I know, I know, this is sloppy.  You're more than welcome to handle this more appropriately... :)
+=======
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
         NSError *error = nil;
         if (![context save:&error]) {
              // Replace this implementation with code to handle the error appropriately.
@@ -150,8 +157,11 @@
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
+<<<<<<< HEAD
     // I know, I know, this is sloppy.  You're more than welcome to handle this more appropriately... :)
     
+=======
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
 	NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error]) {
 	     // Replace this implementation with code to handle the error appropriately.
@@ -226,6 +236,7 @@
 // Add the VIN by displaying a UIAlertView that requests it
 -(void)addVIN:(id)sender {
     
+<<<<<<< HEAD
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter VIN"
                                                     message:nil
                                                    delegate:self
@@ -234,11 +245,20 @@
     
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     alert.tag = 1; // Specific tag for this dialog
+=======
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter VIN" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"OK", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alert.tag = 1;
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
     [alert show];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+<<<<<<< HEAD
+    if (alertView.tag == 1 && buttonIndex == 1) { // If it's the VIN box then process it
+=======
     if (alertView.tag == 1) { // If it's the VIN box then process it
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
         UITextField *vinTextField = [alertView textFieldAtIndex:0];
         NSString *vin = [vinTextField text];
         if ([vin length] > 5) {
@@ -271,7 +291,10 @@
     [request setHTTPBody:requestBody];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
+<<<<<<< HEAD
     // Hide activity indicator
+=======
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
     [ZAActivityBar showWithStatus:[NSString stringWithFormat:@"Decoding: %@", vin]];
     if (connection) {
         mutData = [NSMutableData data];
@@ -280,9 +303,13 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+<<<<<<< HEAD
+    NSString *str = [[NSString alloc] initWithData:mutData encoding:NSUTF8StringEncoding];
+=======
     NSLog(@"Succeeded! Received %d bytes of data",[mutData length]);
     NSString *str = [[NSString alloc] initWithData:mutData encoding:NSUTF8StringEncoding];
     NSLog(@"%@", str);
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
     [[VINParser sharedManager] parseData:str context:self.managedObjectContext withCompletion:^(BOOL success) {
         // Decoding completed
         if (success) {
@@ -299,18 +326,27 @@
         }
 
     }];
+<<<<<<< HEAD
     // Hide activity indicator
+=======
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
     [ZAActivityBar dismiss];
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+<<<<<<< HEAD
+=======
     NSLog(@"%@\n", error.description);
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
     NSString *message = error.localizedDescription;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Loading Error" message:message delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     
     [alert show];
+<<<<<<< HEAD
     // Hide activity indicator
+=======
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
     [ZAActivityBar dismiss];
 }
 
@@ -318,7 +354,10 @@
 {
     [mutData setLength:0];
     NSString *message = nil;
+<<<<<<< HEAD
+=======
     NSLog(@"%@\n", response.description);
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
     NSInteger responseCode = [(NSHTTPURLResponse *)response statusCode];
     
     if (responseCode != 201) { // Was a newly created decode
@@ -338,7 +377,10 @@
                 message = @"Server Error";
                 
             default:
+<<<<<<< HEAD
                 message = @"Unknown Error";
+=======
+>>>>>>> 0052b8f386b52e727648b60e317265f3fc7c4091
                 break;
         }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error Decoding: %i", responseCode] message:message delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
