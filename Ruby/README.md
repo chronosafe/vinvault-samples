@@ -1,18 +1,10 @@
 # VIN Vault Ruby Sample
 
-Access to the VIN Vault API using Ruby can be readily implemented using the `Decoder.rb` module in this folder.  The module is self-contained (meaning the data classes are within the module), but does require the [HTTParty](https://github.com/jnunemaker/httparty)
-ruby gem (You can replace HTTParty with any HTTP gem or simply roll your own).
-
-This module takes the raw JSON file that you get from VIN Vault and converts it into an easy to use set of Ruby classes.  Each class has properties
-mapped to the elements in the JSON.  Where there are relationships (i.e. `Decode` can have many `Trim`) the relationship is represented by an
-array of elements of the child class (i.e. `Decode` has a property called `.trims`, which is an array of `Trim` objects that are related).
-
-This data is not persisted; if you need to store the data for later retrieval I would recommend storing the raw JSON, and using the `Parser` to
-decode the data when needed.
+Access to the VIN Vault API using Ruby can be readily implemented using the `Decoder.rb` module in this folder.  The module is self-contained (meaning the data classes are within the module), but does require the [HTTParty](https://github.com/jnunemaker/httparty) ruby gem.
 
 Usage of the module is as follows:
 
-```ruby
+```
 decoder = Decoder::Parser.new(api_token, version = nil)
 ```
 Where `api_token` is your VIN Vault API token and `version` is the version of the API you wish to use.  Passing no `version` will return data from the latest API version.
