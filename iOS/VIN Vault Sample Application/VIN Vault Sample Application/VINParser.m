@@ -40,7 +40,7 @@
     // We have the root decode, let's create a decode object
     Decode *decode = nil;
     // Determine if the VIN was successfully decoded
-    NSString *status = root[@"status"][0];
+    NSString *status = root[@"success"];
     if ([status isEqualToString:@"true"]) {
         
         // Create the decode object
